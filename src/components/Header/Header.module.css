@@ -1,0 +1,16 @@
+.header{
+display: flex;
+grid-column-start: 1;
+   grid-column-end: 4;
+   grid-row-start: 1;
+   grid-row-end: 2;
+   background-color: wheat;
+}
+
+.header img{
+   max-width: 50px;
+}
+
+.header__title{
+   
+}
