@@ -6,12 +6,16 @@ const MyPost = () => {
       <div>
          <h3>My Posts</h3>
          <div className={styles.post__form}>
-            <input type="text" />
-            <button> Add post</button>
+            <div>
+               <textarea placeholder="Enter your message"></textarea>
+            </div>
+            <div>
+               <button> Add post</button>
+            </div>
          </div>
-         <Post />
-         <Post />
-         <Post />
+         <Post text="qwer" />
+         <Post text="trew" />
+         <Post text="zxcvbn" />
 
       </div>
    )

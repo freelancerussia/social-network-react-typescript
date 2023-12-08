@@ -1,14 +1,18 @@
 import React from "react";
 import styles from "./Post.module.css"
 
-const Post = () => {
+type PostPropsType = {
+   text: string
+}
+
+const Post = (props: PostPropsType) => {
    return (
       <div className={styles.post}>
          <div className={styles.post__img}>
             <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" alt="" />
          </div>
          <p>
-            text
+            {props.text}
          </p>
       </div>
    )
