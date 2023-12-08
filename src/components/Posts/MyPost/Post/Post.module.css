@@ -1,5 +1,7 @@
 .post{
 display: flex;
+flex-wrap: wrap;
+margin: 0px 0px 15px 0px;
 }
 
 .post__img{
@@ -8,4 +10,8 @@ max-width: 50px;
    width: 100%;
    border-radius: 50%;
 }
+}
+
+.likes{
+   flex: 1 0 100%;
 }
