@@ -1,9 +1,9 @@
 import React from "react";
-const Posts = () => {
+const Settings = () => {
    return (
       <div>
-         POSTS
+         SETTINGS
       </div>
    )
 }
-export default Posts;
+export default Settings;

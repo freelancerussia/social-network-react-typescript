@@ -18,7 +18,11 @@ margin: 0px 10px;
 
 .nav__link{
    color:#000;
+   
    &:hover{
       color: blue;
    }
+}
+.active{
+   color: blue;
 }

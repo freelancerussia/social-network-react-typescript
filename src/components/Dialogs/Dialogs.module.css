@@ -1,0 +1,38 @@
+.dialogs{
+   display: flex;
+   padding: 15px;
+}
+
+.dialog__items{
+margin: 0px 15px 0px 0px;
+flex: 0 1 20%;
+}
+
+.dialog{
+border: 1px solid #000;
+margin: 0px 0px 10px 0px;
+padding: 10px;
+display: block;
+}
+.active {
+   border: 1px solid blue;
+   margin: 0px 0px 10px 0px;
+   padding: 10px;
+   display: block;
+   background-color:rgba(39, 71, 123, 0.5)
+}
+
+.active{
+   border: 1px solid blue;
+}
+
+.messages{
+flex: 1 1 auto;
+}
+
+.message{
+border: 1px solid blue;
+border-radius: 15%;
+padding: 10px;
+margin: 0px 0px 5px 0px;
+}
