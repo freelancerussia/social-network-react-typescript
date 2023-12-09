@@ -1,22 +1,26 @@
 import React from "react";
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import { v1 } from "uuid";
+import { PostType } from "../../..";
 
-type PostType = {
-   id: string
-   text: string
-   likesCount: number
+type MyPostPropsType = {
+   posts: Array<PostType>
 }
 
-const MyPost = () => {
+// type PostType = {
+//    id: string
+//    text: string
+//    likesCount: number
+// }
 
-   const postData: Array<PostType> = [
-      { id: v1(), text: "qwer", likesCount: 30 },
-      { id: v1(), text: "bgtrdc", likesCount: 3 },
-      { id: v1(), text: "qazzzz", likesCount: 340 },
-      { id: v1(), text: "xxxxx", likesCount: 20 },
-   ]
+const MyPost = (props: MyPostPropsType) => {
+
+   // const postData: Array<PostType> = [
+   //    { id: v1(), text: "qwer", likesCount: 30 },
+   //    { id: v1(), text: "bgtrdc", likesCount: 3 },
+   //    { id: v1(), text: "qazzzz", likesCount: 340 },
+   //    { id: v1(), text: "xxxxx", likesCount: 20 },
+   // ]
 
    return (
       <div>
@@ -30,7 +34,7 @@ const MyPost = () => {
             </div>
          </div>
          {
-            postData.map(p => {
+            props.posts.map(p => {
                return (
                   <Post key={p.id} text={p.text} likesCount={p.likesCount} />
 
