@@ -7,10 +7,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { StoreType } from '.';
+import { DialogsPageType, ProfilePageType, SidebarType } from './redux/state';
 
 type AppPropsType = {
-  store: StoreType
+  profilePage: ProfilePageType
+  dialogsPage: DialogsPageType
+  sideBar: SidebarType
 }
 
 function App(props: AppPropsType) {
@@ -18,11 +20,11 @@ function App(props: AppPropsType) {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Navbar />
+        <Navbar navMenu={props.sideBar.navMenu} friendsList={props.sideBar.friendsList} />
         <div className='content'>
           <Routes>
-            <Route path="/profile" element={<Profile posts={props.store.postData} />} />
-            <Route path="/dialogs/*" element={<Dialogs messagesData={props.store.messagesData} dialogsData={props.store.dialogsData} />} />
+            <Route path="/profile/*" element={<Profile posts={props.profilePage.posts} />} />
+            <Route path="/dialogs/*" element={<Dialogs dialogsPage={props.dialogsPage} />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

@@ -3,50 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { v1 } from 'uuid';
-
-export type StoreType = {
-  messagesData: Array<MessageType>
-  dialogsData: Array<DialogType>
-  postData: Array<PostType>
-
-}
-
-export type MessageType = {
-  id: string
-  message: string
-}
-export type DialogType = {
-  id: string
-  name: string
-}
-
-export type PostType = {
-  id: string
-  text: string
-  likesCount: number
-}
-
-const store = {
-  messagesData: [
-    { id: v1(), message: "hi" },
-    { id: v1(), message: "yo" },
-    { id: v1(), message: "qqqq" },
-  ],
-  dialogsData: [
-    { id: v1(), name: "Valera" },
-    { id: v1(), name: "Sanya" },
-    { id: v1(), name: "Sasha" },
-  ],
-  postData: [
-    { id: v1(), text: "qwer", likesCount: 30 },
-    { id: v1(), text: "bgtrdc", likesCount: 3 },
-    { id: v1(), text: "qazzzz", likesCount: 340 },
-    { id: v1(), text: "xxxxx", likesCount: 20 },
-  ]
-}
-
-
+import store from "./redux/state"
 
 
 const root = ReactDOM.createRoot(
@@ -54,7 +11,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App store={store} />
+    <App profilePage={store.profilePage} dialogsPage={store.dialogsPage} sideBar={store.sidebar} />
   </React.StrictMode>
 );
 

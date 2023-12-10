@@ -1,28 +1,20 @@
 import React from "react";
 import styles from "./Navbar.module.css"
-import { NavLink } from "react-router-dom"
+import { FrindType, MenuType } from "../../redux/state";
+import Navlinks from "./Navlinks/Navlinks";
+import Navfriends from "./Navfriends/Navfriends";
 
+type NavBarPropsType = {
+   navMenu: Array<MenuType>
+   friendsList: Array<FrindType>
+}
 
-const Navbar = () => {
+const Navbar = (props: NavBarPropsType) => {
    return (
       <nav className={styles.navbar}>
-         <ul className={styles.nav__list}>
-            <li className={styles.nav__element}>
-               <NavLink className={navData => navData.isActive ? styles.active : styles.nav__link} to="/profile">Profile</NavLink>
-            </li>
-            <li className={styles.nav__element}>
-               <NavLink className={navData => navData.isActive ? styles.active : styles.nav__link} to="/dialogs">Messages</NavLink>
-            </li>
-            <li className={styles.nav__element}>
-               <NavLink className={navData => navData.isActive ? styles.active : styles.nav__link} to="/music">Music</NavLink>
-            </li>
-            <li className={styles.nav__element}>
-               <NavLink className={navData => navData.isActive ? styles.active : styles.nav__link} to="/settings">Settings</NavLink>
-            </li>
-            <li className={styles.nav__element}>
-               <NavLink className={navData => navData.isActive ? styles.active : styles.nav__link} to="/other">other</NavLink>
-            </li>
-         </ul>
+         <Navlinks navMenu={props.navMenu} />
+         <Navfriends friendsList={props.friendsList} />
+
       </nav>
    )
 }

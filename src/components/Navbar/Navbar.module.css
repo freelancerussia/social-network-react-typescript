@@ -9,7 +9,7 @@
 }
 
 .nav__list{
-
+margin: 0px 0px 15px 0px;
 }
 
 .nav__element{
@@ -25,4 +25,9 @@ margin: 0px 10px;
 }
 .active{
    color: blue;
+}
+
+.friendsList{
+   display: flex;
+   justify-content: space-between;
 }
