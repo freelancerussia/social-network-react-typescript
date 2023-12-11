@@ -2,42 +2,34 @@ import React from "react";
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import { PostType } from "../../../redux/state";
+import { Button } from "antd";
+
+import { Input } from 'antd';
+
+const { TextArea } = Input;
 
 type MyPostPropsType = {
    posts: Array<PostType>
 }
 
-// type PostType = {
-//    id: string
-//    text: string
-//    likesCount: number
-// }
 
 const MyPost = (props: MyPostPropsType) => {
-
-   // const postData: Array<PostType> = [
-   //    { id: v1(), text: "qwer", likesCount: 30 },
-   //    { id: v1(), text: "bgtrdc", likesCount: 3 },
-   //    { id: v1(), text: "qazzzz", likesCount: 340 },
-   //    { id: v1(), text: "xxxxx", likesCount: 20 },
-   // ]
 
    return (
       <div>
          <h3>My Posts</h3>
          <div className={styles.post__form}>
-            <div>
-               <textarea placeholder="Enter your message"></textarea>
+            <div className={styles.textarea}>
+               <TextArea autoSize placeholder="Enter your message"></TextArea>
             </div>
             <div>
-               <button> Add post</button>
+               <Button > Add post</Button>
             </div>
          </div>
          {
             props.posts.map(p => {
                return (
                   <Post key={p.id} text={p.text} likesCount={p.likesCount} />
-
                )
             })
          }
