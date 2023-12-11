@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 );
 let rerenderEntire = (state: StateType) => root.render(
   <React.StrictMode>
-    <App profilePage={state.profilePage}
+    <App profilePage={state.profilePage} dispatch={store.dispatch.bind(store)}
       dialogsPage={state.dialogsPage}
       sideBar={state.sidebar} />
   </React.StrictMode>

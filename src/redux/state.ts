@@ -28,6 +28,7 @@ export type FrindType = {
 
 export type ProfilePageType = {
    posts: Array<PostType>
+   newPostText: string
 }
 export type DialogsPageType = {
    messages: Array<MessageType>
@@ -42,12 +43,13 @@ export type StateType = {
    dialogsPage: DialogsPageType
    sidebar: SidebarType
 }
+export type DispatchActionType = ProfileReducerActionType
 type StoreType = {
    _state: StateType
    _rerender: (state: StateType) => void
    getState: () => StateType
    subscriber: (observer: (state: StateType) => void) => void
-   dispatch: (action: ProfileReducerActionType) => void
+   dispatch: (action: DispatchActionType) => void
 }
 
 
@@ -59,7 +61,8 @@ const store: StoreType = {
             { id: v1(), text: "bgtrdc", likesCount: 3 },
             { id: v1(), text: "qazzzz", likesCount: 340 },
             { id: v1(), text: "xxxxx", likesCount: 20 },
-         ]
+         ],
+         newPostText: ""
       },
       dialogsPage: {
          messages: [

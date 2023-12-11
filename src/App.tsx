@@ -7,12 +7,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { DialogsPageType, ProfilePageType, SidebarType } from './redux/state';
+import { DialogsPageType, DispatchActionType, ProfilePageType, SidebarType } from './redux/state';
 
 type AppPropsType = {
   profilePage: ProfilePageType
   dialogsPage: DialogsPageType
   sideBar: SidebarType
+  dispatch: (action: DispatchActionType) => void
 }
 
 function App(props: AppPropsType) {
@@ -23,7 +24,7 @@ function App(props: AppPropsType) {
         <Navbar navMenu={props.sideBar.navMenu} friendsList={props.sideBar.friendsList} />
         <div className='content'>
           <Routes>
-            <Route path="/profile/*" element={<Profile posts={props.profilePage.posts} />} />
+            <Route path="/profile/*" element={<Profile profilePage={props.profilePage} dispatch={props.dispatch} />} />
             <Route path="/dialogs/*" element={<Dialogs dialogsPage={props.dialogsPage} />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
