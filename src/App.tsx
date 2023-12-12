@@ -25,7 +25,7 @@ function App(props: AppPropsType) {
         <div className='content'>
           <Routes>
             <Route path="/profile/*" element={<Profile profilePage={props.profilePage} dispatch={props.dispatch} />} />
-            <Route path="/dialogs/*" element={<DialogsContainer dialogsPage={props.dialogsPage} dispatch={props.dispatch} />} />
+            <Route path="/dialogs/*" element={<DialogsContainer />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

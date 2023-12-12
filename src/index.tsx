@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store, { StateType } from "./redux/redux-store"
+import store, { StateType, StoreContext } from "./redux/redux-store"
 
 
 const root = ReactDOM.createRoot(
@@ -11,9 +11,11 @@ const root = ReactDOM.createRoot(
 );
 let rerenderEntire = (state: StateType) => root.render(
   <React.StrictMode>
-    <App profilePage={state.profilePage} dispatch={store.dispatch.bind(store)}
-      dialogsPage={state.dialogsPage}
-      sideBar={state.sidebarPage} />
+    <StoreContext.Provider value={store}>
+      <App profilePage={state.profilePage} dispatch={store.dispatch.bind(store)}
+        dialogsPage={state.dialogsPage}
+        sideBar={state.sidebarPage} />
+    </StoreContext.Provider>
   </React.StrictMode>
 );
 rerenderEntire(store.getState());
