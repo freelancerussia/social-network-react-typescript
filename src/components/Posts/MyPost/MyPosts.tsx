@@ -2,12 +2,12 @@ import React, { ChangeEvent } from "react";
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import { PostType } from "../../../redux/state";
-import { Button } from "antd";
 
 import { Input } from 'antd';
 import { ProfileReducerActionType, addPostAC, updateNewPostTextAC } from "../../../redux/profileReducer";
+import { Myform } from "../../UI/Myform/Myform";
 
-const { TextArea } = Input;
+
 
 type MyPostPropsType = {
    posts: Array<PostType>
@@ -29,12 +29,13 @@ const MyPost = (props: MyPostPropsType) => {
       <div>
          <h3>My Posts</h3>
          <div className={styles.post__form}>
-            <div className={styles.textarea}>
+            {/* <div className={styles.textarea}>
                <TextArea value={props.newPostText} onChange={updateNewPostText} autoSize placeholder="Enter your message"></TextArea>
             </div>
             <div>
                <Button onClick={addPost} > Add post</Button>
-            </div>
+            </div> */}
+            <Myform textValue={props.newPostText} onChangeHandler={updateNewPostText} sendText={addPost} buttonCaption="Add post" />
          </div>
          {
             props.posts.map(p => {
