@@ -3,22 +3,23 @@ import styles from "./Dialogs.module.css"
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
 import { DialogsPageType } from "../../redux/state";
-import { DialogsReducerActionType, addNewMessagetAC, updateNewMessageTextAC } from "../../redux/dialogsReducer";
 import { Myform } from "../UI/Myform/Myform";
 
 
 type DialogsPropsType = {
    dialogsPage: DialogsPageType
-   dispatch: (action: DialogsReducerActionType) => void
+   updateNewMessageText: (newMessage: string) => void
+   addNewMessage: () => void
+
 
 }
 const Dialogs = (props: DialogsPropsType) => {
 
    const updateNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
+      props.updateNewMessageText(e.currentTarget.value)
    }
    const addNewMessage = () => {
-      props.dispatch(addNewMessagetAC());
+      props.addNewMessage();
    }
 
    return (
