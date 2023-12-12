@@ -1,37 +1,32 @@
-import React, { ChangeEvent } from "react";
-import { PostType } from "../../../redux/state";
+import { StateType } from "../../../redux/state";
 
-import { ProfileReducerActionType, addPostAC, updateNewPostTextAC } from "../../../redux/profileReducer";
+import { addPostAC, updateNewPostTextAC } from "../../../redux/profileReducer";
 import MyPost from "./MyPosts";
-import { StoreContext } from "../../../redux/redux-store";
+import { AppDispatch } from "../../../redux/redux-store";
+import { connect } from "react-redux";
 
 
+let mstp = (state: StateType) => {
+   return {
+      posts: state.profilePage.posts,
+      newPostText: state.profilePage.newPostText,
 
-type MyPostPropsType = {
-   posts: Array<PostType>
-   newPostText: string
-   dispatch: (action: ProfileReducerActionType) => void
+   }
+}
+let mdtp = (dispatch: AppDispatch) => {
+   return {
+      updateNewPostText: (newText: string) => {
+         dispatch(updateNewPostTextAC(newText));
+      },
+      addPost: () => {
+         dispatch(addPostAC());
+      },
+
+   }
 }
 
 
-const MyPostContainer = (props: MyPostPropsType) => {
+const MyPostContainer = connect(mstp, mdtp)(MyPost);
 
 
-
-   return (
-      <StoreContext.Consumer>
-         {
-            store => {
-               const addPost = () => {
-                  store.dispatch(addPostAC());
-               }
-               const updateNewPostText = (newText: string) => {
-                  store.dispatch(updateNewPostTextAC(newText))
-               }
-               return <MyPost posts={props.posts} updateNewPostText={updateNewPostText} addPost={addPost} newPostText={props.newPostText} />
-            }
-         }
-      </StoreContext.Consumer>
-   )
-}
 export default MyPostContainer;

@@ -1,8 +1,3 @@
-import React from "react";
-import { MusicReducerActionType } from "../../redux/musicReducer";
-import { AppDispatch } from "../../redux/redux-store";
-
-
 type MusicPropsType = {
 
 }

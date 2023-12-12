@@ -2,9 +2,6 @@ import React, { ChangeEvent } from "react";
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import { PostType } from "../../../redux/state";
-
-import { Input } from 'antd';
-import { ProfileReducerActionType, addPostAC, updateNewPostTextAC } from "../../../redux/profileReducer";
 import { Myform } from "../../UI/Myform/Myform";
 
 
