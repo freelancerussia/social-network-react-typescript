@@ -1,0 +1,10 @@
+.userContainer{
+   display:flex;
+   justify-content: space-between;
+}
+.imgContainer{
+   max-width: 50px;
+   & img {
+      width: 100%;
+   }
+}

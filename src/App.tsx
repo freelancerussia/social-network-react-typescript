@@ -8,6 +8,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { DialogsPageType, DispatchActionType, ProfilePageType, SidebarType } from './redux/state';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 type AppPropsType = {
   profilePage: ProfilePageType
@@ -28,6 +29,7 @@ function App(props: AppPropsType) {
             <Route path="/dialogs/*" element={<DialogsContainer />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/users" element={<UsersContainer />} />
           </Routes>
         </div>
       </BrowserRouter>
