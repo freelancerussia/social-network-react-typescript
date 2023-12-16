@@ -23,7 +23,7 @@ const User = (props: UserPropsType) => {
    return (
       <div className={styles.userContainer}>
          <div>
-            <div className={styles.imgContainer}><img src="" alt="" /></div>
+            <div className={styles.imgContainer}><img src={props.photos || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ArKQ5AIUqacA-5ofQ5nfPevwR0RtI7PBtg&usqp=CAU"} alt="" /></div>
             <div> {props.followed ? <button onClick={onUnFollow}>unfollow</button> : <button onClick={onFollow}>follow</button>} </div>
          </div>
          <div>
@@ -35,8 +35,9 @@ const User = (props: UserPropsType) => {
             </div>
          </div>
          <div>
-            {/* <div>{props.address.city}</div>
-            <div>{props.address.country}</div> */}
+            address
+            {/* <div>{props.address.city}</div> */}
+            {/* <div>{props.address.country}</div> */}
          </div>
       </div>
    )

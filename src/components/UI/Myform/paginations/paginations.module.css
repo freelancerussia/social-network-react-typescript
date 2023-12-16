@@ -1,0 +1,16 @@
+.active {
+   font-weight: bold;
+}
+
+.paginations {
+   display: flex;
+   overflow: scroll;
+   max-width: 80vw;
+
+   & span {
+      cursor: pointer;
+      margin: 0px 5px 0px 0px;
+   }
+}
+
+.page {}
