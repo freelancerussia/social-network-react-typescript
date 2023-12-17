@@ -1,7 +1,19 @@
 import { v1 } from "uuid";
-import { SidebarType } from "./state"
 
 export type SidebarReducerActionType = ""
+export type MenuType = {
+   id: string
+   path: string
+   title: string
+}
+export type FrindType = {
+   id: string
+   name: string
+}
+export type SidebarType = {
+   navMenu: Array<MenuType>
+   friendsList: Array<FrindType>
+}
 
 let initialState: SidebarType = {
    navMenu: [

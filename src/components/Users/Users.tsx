@@ -18,29 +18,7 @@ type UsersPropsType = {
    totalCount: number
 }
 
-
-type GetResponseUsersDataType = {
-   items: Array<UserType>
-   totalCount: number
-}
-
-let baseUrl = "https://social-network.samuraijs.com/api/1.0/"
 const Users = (props: UsersPropsType) => {
-   useEffect(() => {
-      // return () => {
-      async function getUsers() {
-         await axios.get<GetResponseUsersDataType>(`${baseUrl}users?page=${props.currentPage}&count=${props.usersCount}`)
-            .then(response => {
-               console.log(response.data.items);
-
-               props.setTotalCount(response.data.totalCount);
-               props.setUsers(response.data.items)
-            })
-      }
-      getUsers();
-      // }
-   }, [props.currentPage]);
-
    return (
       <div>
          <Paginations currentPage={props.currentPage}

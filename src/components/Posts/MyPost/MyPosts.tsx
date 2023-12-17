@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from "react";
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import { PostType } from "../../../redux/state";
 import { Myform } from "../../UI/Myform/Myform";
+import { PostType } from "../../../redux/profileReducer";
 
 
 

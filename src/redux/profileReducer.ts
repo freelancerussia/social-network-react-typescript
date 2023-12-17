@@ -1,7 +1,10 @@
 import { v1 } from "uuid"
-import { ProfilePageType } from "./state"
 
-export type ProfileReducerActionType = addPostActionType | updateNewPostTextActionType
+
+type SetUserProfileAction = {
+   type: "SET-USER-PROFILE"
+   userProfile: UserProfileType
+}
 
 type addPostActionType = {
    type: 'ADD-POST'
@@ -11,16 +14,75 @@ type updateNewPostTextActionType = {
    type: 'UPDATE-NEW-POST-TEXT'
    newPostText: string
 }
+export type PostType = {
+   id: string
+   text: string
+   likesCount: number
+}
+
+
+
+export type ContactsUserType = {
+   [key: string]: string | null
+   // facebook: string | null
+   // website: string | null
+   // vk: string | null
+   // instagram: string | null
+   // twitter: string | null
+   // github: string | null
+   // youtube: string | null
+   // mainLink: string | null
+}
+type PhotoUserType = {
+   small: null | string
+   large: null | string
+}
+export type UserProfileType = {
+   userId: number
+   aboutMe: string | null
+   fullName: string
+   lookingForAJob: boolean
+   lookingForAJobDescription: string
+   contacts: ContactsUserType
+   photos: PhotoUserType
+
+}
+export type ProfilePageType = {
+   posts: Array<PostType>
+   newPostText: string
+   userProfile: UserProfileType
+}
 
 let initialState: ProfilePageType = {
    posts: [
       { id: v1(), text: "qwer", likesCount: 30 },
-      { id: v1(), text: "bgtrdc", likesCount: 3 },
-      { id: v1(), text: "qazzzz", likesCount: 340 },
-      { id: v1(), text: "xxxxx", likesCount: 20 },
    ],
+   userProfile: {
+      aboutMe: "я круто чувак 1001%",
+      contacts: {
+         facebook: 'facebook.com',
+         website: null,
+         vk: 'vk.com/dimych',
+         twitter: 'https://twitter.com/@sdf',
+         instagram: 'instagra.com/sds',
+         github: 'https://github.com',
+         youtube: 'https://youtube.com',
+         mainLink: null,
+      },
+      fullName: "samurai dimych",
+      lookingForAJob: true,
+      lookingForAJobDescription: "не ищу, а дурачусь",
+      photos: {
+         small: 'https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0',
+         large: 'https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0'
+      },
+      userId: 2,
+   },
    newPostText: "",
 }
+
+export type ProfileReducerActionType = addPostActionType | updateNewPostTextActionType | SetUserProfileAction
+
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType): ProfilePageType => {
    let copyState = { ...state };
@@ -38,24 +100,34 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
       }
       case "UPDATE-NEW-POST-TEXT":
          copyState.newPostText = action.newPostText;
-
          return copyState;
+      case "SET-USER-PROFILE":
+         return {
+            ...state,
+            userProfile: action.userProfile
+         }
       default:
          return state
    }
 
 }
 
-export const addPostAC = (): addPostActionType => {
+export const addPost = (): addPostActionType => {
    return {
       type: 'ADD-POST',
    }
 }
 
-export const updateNewPostTextAC = (text: string): updateNewPostTextActionType => {
+export const updateNewPostText = (text: string): updateNewPostTextActionType => {
    return {
       type: 'UPDATE-NEW-POST-TEXT',
       newPostText: text
+   }
+}
+export const setUserProfile = (userProfile: UserProfileType): SetUserProfileAction => {
+   return {
+      type: 'SET-USER-PROFILE',
+      userProfile
    }
 }
 

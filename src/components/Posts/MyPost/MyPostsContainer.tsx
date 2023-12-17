@@ -1,8 +1,7 @@
-import { StateType } from "../../../redux/state";
 
-import { addPostAC, updateNewPostTextAC } from "../../../redux/profileReducer";
+import { addPost, updateNewPostText } from "../../../redux/profileReducer";
 import MyPost from "./MyPosts";
-import { AppDispatch } from "../../../redux/redux-store";
+import { AppDispatch, StateType } from "../../../redux/redux-store";
 import { connect } from "react-redux";
 
 
@@ -13,20 +12,23 @@ let mstp = (state: StateType) => {
 
    }
 }
-let mdtp = (dispatch: AppDispatch) => {
-   return {
-      updateNewPostText: (newText: string) => {
-         dispatch(updateNewPostTextAC(newText));
-      },
-      addPost: () => {
-         dispatch(addPostAC());
-      },
+// let mdtp = (dispatch: AppDispatch) => {
+//    return {
+//       updateNewPostText: (newText: string) => {
+//          dispatch(updateNewPostTextAC(newText));
+//       },
+//       addPost: () => {
+//          dispatch(addPostAC());
+//       },
 
-   }
-}
+//    }
+// }
 
 
-const MyPostContainer = connect(mstp, mdtp)(MyPost);
+const MyPostContainer = connect(mstp, {
+   updateNewPostText,
+   addPost
+})(MyPost);
 
 
 export default MyPostContainer;

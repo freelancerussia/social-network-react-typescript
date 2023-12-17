@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./../Navbar.module.css"
 import { NavLink } from "react-router-dom";
-import { MenuType } from "../../../redux/state";
+import { MenuType } from "../../../redux/sidebarReducer";
 
 type NavLinksPropsType = {
    navMenu: Array<MenuType>

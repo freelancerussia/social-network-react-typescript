@@ -10,49 +10,31 @@ export type DialogType = {
    id: string
    name: string
 }
-export type PostType = {
-   id: string
-   text: string
-   likesCount: number
-}
-export type MenuType = {
-   id: string
-   path: string
-   title: string
-}
-export type FrindType = {
-   id: string
-   name: string
-}
 
 
-export type ProfilePageType = {
-   posts: Array<PostType>
-   newPostText: string
-}
+
+
+
 export type DialogsPageType = {
    messages: Array<MessageType>
    dialogs: Array<DialogType>
    newMessageText: string
 }
-export type SidebarType = {
-   navMenu: Array<MenuType>
-   friendsList: Array<FrindType>
-}
+
 export type MusicPageType = {}
-export type StateType = {
-   profilePage: ProfilePageType
-   dialogsPage: DialogsPageType
-   sidebar: SidebarType
-}
+// export type StateType = {
+//    profilePage: ProfilePageType
+//    dialogsPage: DialogsPageType
+//    sidebar: SidebarType
+// }
 export type DispatchActionType = ProfileReducerActionType | DialogsReducerActionType
-type StoreType = {
-   _state: StateType
-   _rerender: (state: StateType) => void
-   getState: () => StateType
-   subscriber: (observer: (state: StateType) => void) => void
-   dispatch: (action: DispatchActionType) => void
-}
+// type StoreType = {
+//    _state: StateType
+//    _rerender: (state: StateType) => void
+//    getState: () => StateType
+//    subscriber: (observer: (state: StateType) => void) => void
+//    dispatch: (action: DispatchActionType) => void
+// }
 
 
 // const store: StoreType = {

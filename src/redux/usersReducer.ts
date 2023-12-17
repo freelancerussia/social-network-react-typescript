@@ -2,6 +2,10 @@ export type AddressType = {
    city: string
    country: string
 }
+type SetFetchingStatus = {
+   type: "SET-FETCHING-STATUS"
+   status: boolean
+}
 
 type UnfollowActionType = {
    type: "UNFOLLOW"
@@ -25,8 +29,8 @@ type SetCurrentPageType = {
 }
 
 type PhotoUserType = {
-   small: null
-   large: null
+   small: null | string
+   large: null | string
 }
 export type UserType = {
    id: number
@@ -41,6 +45,7 @@ export type UsersStateType = {
    totalCount: number
    usersCount: number
    currentPage: number
+   isFetching: boolean
 }
 
 
@@ -55,11 +60,12 @@ let initialState = {
    ],
    totalCount: 1,
    usersCount: 5,
-   currentPage: 1
+   currentPage: 1,
+   isFetching: false,
 }
 
 export type UsersReducerActionType = UnfollowActionType | FollowActionType | SetUsersActionType
-   | SetTotalCountActionType | SetCurrentPageType
+   | SetTotalCountActionType | SetCurrentPageType | SetFetchingStatus
 
 const usersReduser = (state: UsersStateType = initialState, action: UsersReducerActionType) => {
    // let stateCopy = { ...state };
@@ -85,8 +91,6 @@ const usersReduser = (state: UsersStateType = initialState, action: UsersReducer
             })
          }
       case "SET-USERS":
-         console.log("action", state.users);
-
          return {
             ...state,
             users: [...action.users]
@@ -101,40 +105,51 @@ const usersReduser = (state: UsersStateType = initialState, action: UsersReducer
             ...state,
             currentPage: action.page
          }
+      case "SET-FETCHING-STATUS":
+         return {
+            ...state,
+            isFetching: action.status
+         }
 
       default:
          return state;
    }
 }
 
-export const followAC = (id: number): FollowActionType => {
+export const follow = (id: number): FollowActionType => {
    return {
       type: "FOLLOW",
       id: id
    }
 }
-export const unfollowAC = (id: number): UnfollowActionType => {
+export const unfollow = (id: number): UnfollowActionType => {
    return {
       type: "UNFOLLOW",
       id: id
    }
 }
-export const setUsersAC = (users: Array<UserType>): SetUsersActionType => {
+export const setUsers = (users: Array<UserType>): SetUsersActionType => {
    return {
       type: "SET-USERS",
       users: users
    }
 }
-export const setTotalCountAC = (count: number): SetTotalCountActionType => {
+export const setTotalCount = (count: number): SetTotalCountActionType => {
    return {
       type: "SET-TOTAL-COUNT",
       count
    }
 }
-export const setCurrentPageAC = (page: number): SetCurrentPageType => {
+export const setCurrentPage = (page: number): SetCurrentPageType => {
    return {
       type: "SET-CURRENT-PAGE",
       page
+   }
+}
+export const setFetchingStatus = (status: boolean): SetFetchingStatus => {
+   return {
+      type: "SET-FETCHING-STATUS",
+      status
    }
 }
 

@@ -5,6 +5,7 @@ import dialogsReducer from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReduser from "./usersReducer";
 
+export const baseUrl = "https://social-network.samuraijs.com/api/1.0/";
 
 
 let reducers = combineReducers({

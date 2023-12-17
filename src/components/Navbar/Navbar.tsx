@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Navbar.module.css"
-import { FrindType, MenuType } from "../../redux/state";
 import Navlinks from "./Navlinks/Navlinks";
 import Navfriends from "./Navfriends/Navfriends";
+import { FrindType, MenuType } from "../../redux/sidebarReducer";
 
 type NavBarPropsType = {
    navMenu: Array<MenuType>

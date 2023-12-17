@@ -6,3 +6,30 @@
       max-height: 300px;
    }
 }
+
+.userImg{
+   max-width: 100px;
+   & img{
+      width: 100%;
+   }
+}
+.aboutMe{
+   opacity: 0.7;
+}
+.userInfo{
+   display: flex;
+   justify-content: space-between;
+   margin: 10px 0px;
+}
+.fullName{}
+.jobFind{
+
+}
+
+.contacts{
+display: flex;
+}
+
+.contact{
+
+}

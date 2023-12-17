@@ -1,7 +1,7 @@
 import React from "react";
-import { FrindType } from "../../../redux/state";
 import Friendpriview from "./Friendpreview/Friendpriview";
 import styles from './../Navbar.module.css'
+import { FrindType } from "../../../redux/sidebarReducer";
 
 type NavfriendsPropsType = {
    friendsList: Array<FrindType>

@@ -26,7 +26,7 @@ const Paginations = (props: PaginatiosPropsType) => {
                   props.setCurrentPage(p)
                }
                return (
-                  <PaginationPage page={p} currentPage={props.currentPage} setCurrentPage={setCurrentPage} />
+                  <PaginationPage key={p} page={p} currentPage={props.currentPage} setCurrentPage={setCurrentPage} />
                )
             })
          }
