@@ -24,7 +24,7 @@ function App(props: AppPropsType) {
         <Navbar navMenu={props.sideBar.navMenu} friendsList={props.sideBar.friendsList} />
         <div className='content'>
           <Routes>
-            <Route path="/profile/*" element={<ProfileContainer />} />
+            <Route path="/profile/:id" element={<ProfileContainer />} />
             <Route path="/dialogs/*" element={<DialogsContainer />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './User.module.css'
+import { Link } from "react-router-dom";
 
 
 type UserPropsType = {
@@ -23,7 +24,10 @@ const User = (props: UserPropsType) => {
    return (
       <div className={styles.userContainer}>
          <div>
-            <div className={styles.imgContainer}><img src={props.photos || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ArKQ5AIUqacA-5ofQ5nfPevwR0RtI7PBtg&usqp=CAU"} alt="" /></div>
+            <Link to={`/profile/${props.id}`}>
+
+               <div className={styles.imgContainer}><img src={props.photos || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ArKQ5AIUqacA-5ofQ5nfPevwR0RtI7PBtg&usqp=CAU"} alt="" /></div>
+            </Link>
             <div> {props.followed ? <button onClick={onUnFollow}>unfollow</button> : <button onClick={onFollow}>follow</button>} </div>
          </div>
          <div>

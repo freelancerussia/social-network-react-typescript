@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import { StateType, baseUrl } from "../../redux/redux-store";
 import { updateNewPostText, addPost, ProfilePageType, setUserProfile, UserProfileType } from "../../redux/profileReducer";
 import axios from "axios";
+import { useLocation, useParams } from "react-router-dom";
 
 type ProfileContainerPropsType = {
    profilePage: ProfilePageType
@@ -15,7 +16,7 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
 
    useEffect(() => {
       async function getProfile() {
-         await axios.get<UserProfileType>(`${baseUrl}profile/3`)
+         await axios.get<UserProfileType>(`${baseUrl}profile/${params.id}`)
             .then(response => {
                console.log(response.data);
                props.setUserProfile(response.data)
@@ -23,7 +24,9 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
       }
       getProfile();
    }, [])
-   console.log(props.userProfile);
+
+   let params = useParams();
+
 
 
    return (
