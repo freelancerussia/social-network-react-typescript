@@ -1,3 +1,6 @@
+import { usersAPI } from "../api"
+import { AppDispatch } from "./redux-store"
+
 export type AddressType = {
    city: string
    country: string
@@ -189,5 +192,35 @@ export const removeFollowedUserNumber = (id: number): FollowedUsersRemoveType =>
    }
 }
 
+export const getUsers = (currentPage: number, usersCount: number) => (dispatch: AppDispatch) => {
+   dispatch(setFetchingStatus(true));
+   usersAPI.getUsers(currentPage, usersCount)
+      .then(response => {
+         dispatch(setTotalCount(response.data.totalCount));
+         dispatch(setUsers(response.data.items));
+         dispatch(setFetchingStatus(false));
+      })
+}
+
+export const followT = (id: number) => (dispatch: AppDispatch) => {
+   dispatch(addFollowedUserNumber(id));
+   usersAPI.follow(id)
+      .then(response => {
+         if (response.data.resultCode === 0) {
+            dispatch(follow(id))
+            dispatch(removeFollowedUserNumber(id));
+         }
+      })
+}
+export const unfollowT = (id: number) => (dispatch: AppDispatch) => {
+   dispatch(addFollowedUserNumber(id));
+   usersAPI.unfollow(id)
+      .then(response => {
+         if (response.data.resultCode === 0) {
+            dispatch(unfollow(id))
+            dispatch(removeFollowedUserNumber(id));
+         }
+      })
+}
 
 export default usersReduser;

@@ -1,4 +1,6 @@
 import { v1 } from "uuid"
+import { AppDispatch } from "./redux-store"
+import { usersAPI } from "../api"
 
 
 type SetUserProfileAction = {
@@ -58,23 +60,23 @@ let initialState: ProfilePageType = {
       { id: v1(), text: "qwer", likesCount: 30 },
    ],
    userProfile: {
-      aboutMe: "я круто чувак 1001%",
+      aboutMe: "",
       contacts: {
-         facebook: 'facebook.com',
+         facebook: '',
          website: null,
-         vk: 'vk.com/dimych',
-         twitter: 'https://twitter.com/@sdf',
+         vk: '',
+         twitter: '',
          instagram: 'instagra.com/sds',
          github: 'https://github.com',
          youtube: 'https://youtube.com',
          mainLink: null,
       },
-      fullName: "samurai dimych",
+      fullName: "",
       lookingForAJob: true,
-      lookingForAJobDescription: "не ищу, а дурачусь",
+      lookingForAJobDescription: "",
       photos: {
-         small: 'https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0',
-         large: 'https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0'
+         small: '',
+         large: ''
       },
       userId: 2,
    },
@@ -129,6 +131,15 @@ export const setUserProfile = (userProfile: UserProfileType): SetUserProfileActi
       type: 'SET-USER-PROFILE',
       userProfile
    }
+}
+
+export const getProfile = (id: number) => (dispatch: AppDispatch) => {
+   usersAPI.getProfile(id)
+      .then(response => {
+         // console.log(response);
+         dispatch(setUserProfile(response.data));
+      })
+
 }
 
 export default profileReducer;

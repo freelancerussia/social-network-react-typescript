@@ -16,10 +16,11 @@ const HeaderContainer = () => {
       authAPI.me()
          .then(response => {
             if (response.data.resultCode === 0) {
-               dispatch(me({ login: response.data.data.login, email: response.data.data.email, isAuth: true }))
+               dispatch(me({ login: response.data.data.login, email: response.data.data.email, isAuth: true, id: response.data.data.id }))
             }
 
          })
+      // dispatch(authMe())
    }, [])
 
    return (

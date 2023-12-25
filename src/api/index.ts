@@ -10,6 +10,7 @@ type GetResponseUsersDataType = {
 type AuthDataType = {
    login: string | null
    email: string | null
+   id: number | null
 
 }
 

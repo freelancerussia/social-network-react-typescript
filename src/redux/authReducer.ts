@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AppDispatch } from "./redux-store";
+import { authAPI } from "../api";
 
 export type AuthStateType = {
    email: string | null
    isAuth: boolean
    login: string | null
+   id: number
 }
 
 const initialState: AuthStateType = {
    email: "",
    isAuth: false,
-   login: ""
+   login: "",
+   id: 2
 }
 
 const authSlice = createSlice({
@@ -20,6 +24,7 @@ const authSlice = createSlice({
          state.email = action.payload.email
          state.login = action.payload.login
          state.isAuth = action.payload.isAuth
+         state.id = action.payload.id
       }
    }
 });
@@ -28,3 +33,13 @@ const authSlice = createSlice({
 export const { me } = authSlice.actions;
 
 export default authSlice.reducer;
+
+// export const authMe = () => (dispatch: AppDispatch) => {
+//    authAPI.me()
+//       .then(response => {
+//          if (response.data.resultCode === 0) {
+//             dispatch(me({ login: response.data.data.login, email: response.data.data.email, isAuth: true, id: response.data.data.id }))
+//          }
+
+//       })
+// }

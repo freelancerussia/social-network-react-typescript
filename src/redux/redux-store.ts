@@ -18,6 +18,7 @@ let reducers = combineReducers({
 });
 let store = configureStore({
    reducer: reducers,
+   // middleware(getDefaultMiddleware) => {}
 });
 
 // export let StoreContext = createContext(store);

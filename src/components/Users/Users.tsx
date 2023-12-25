@@ -10,7 +10,6 @@ type UsersPropsType = {
    users: Array<UserType>
    follow: (id: number) => void
    unfollow: (id: number) => void
-   setUsers: (users: Array<UserType>) => void
    currentPage: number
    usersCount: number
    setTotalCount: (count: number) => void
