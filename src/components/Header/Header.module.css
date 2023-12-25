@@ -1,5 +1,6 @@
 .header{
 display: flex;
+justify-content: space-between;
 grid-column-start: 1;
    grid-column-end: 4;
    grid-row-start: 1;
@@ -13,4 +14,8 @@ grid-column-start: 1;
 
 .header__title{
    
+}
+
+.logo_info{
+   display:flex;
 }

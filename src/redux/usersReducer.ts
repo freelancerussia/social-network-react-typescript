@@ -7,6 +7,15 @@ type SetFetchingStatus = {
    status: boolean
 }
 
+type FollowedUsersAddType = {
+   type: "ADD-USER-FOLLOW"
+   id: number
+}
+type FollowedUsersRemoveType = {
+   type: "REMOVE-USER-FOLLOW"
+   id: number
+}
+
 type UnfollowActionType = {
    type: "UNFOLLOW"
    id: number
@@ -46,10 +55,11 @@ export type UsersStateType = {
    usersCount: number
    currentPage: number
    isFetching: boolean
+   followedUsers: Array<number>
 }
 
 
-let initialState = {
+let initialState: UsersStateType = {
    users: [
       {
          name: "Shubert", id: 111111, status: null, followed: false, uniqueUrlName: null, photos: {
@@ -62,10 +72,12 @@ let initialState = {
    usersCount: 5,
    currentPage: 1,
    isFetching: false,
+   followedUsers: [],
 }
 
 export type UsersReducerActionType = UnfollowActionType | FollowActionType | SetUsersActionType
-   | SetTotalCountActionType | SetCurrentPageType | SetFetchingStatus
+   | SetTotalCountActionType | SetCurrentPageType | SetFetchingStatus | FollowedUsersAddType
+   | FollowedUsersRemoveType
 
 const usersReduser = (state: UsersStateType = initialState, action: UsersReducerActionType) => {
    // let stateCopy = { ...state };
@@ -110,6 +122,16 @@ const usersReduser = (state: UsersStateType = initialState, action: UsersReducer
             ...state,
             isFetching: action.status
          }
+      case "ADD-USER-FOLLOW":
+         return {
+            ...state,
+            followedUsers: [...state.followedUsers, action.id]
+         }
+      case "REMOVE-USER-FOLLOW":
+         return {
+            ...state,
+            followedUsers: state.followedUsers.filter(id => id !== action.id)
+         }
 
       default:
          return state;
@@ -150,6 +172,20 @@ export const setFetchingStatus = (status: boolean): SetFetchingStatus => {
    return {
       type: "SET-FETCHING-STATUS",
       status
+   }
+}
+
+export const addFollowedUserNumber = (id: number): FollowedUsersAddType => {
+   return {
+      type: "ADD-USER-FOLLOW",
+      id
+   }
+}
+
+export const removeFollowedUserNumber = (id: number): FollowedUsersRemoveType => {
+   return {
+      type: "REMOVE-USER-FOLLOW",
+      id
    }
 }
 

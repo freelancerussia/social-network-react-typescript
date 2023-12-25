@@ -1,10 +1,21 @@
 import { connect } from "react-redux";
 import { StateType, baseUrl } from "../../redux/redux-store";
-import { UserType, follow, setCurrentPage, setTotalCount, setUsers, unfollow, setFetchingStatus } from "../../redux/usersReducer";
+import {
+   UserType,
+   follow,
+   setCurrentPage,
+   setTotalCount,
+   setUsers,
+   unfollow,
+   setFetchingStatus,
+   addFollowedUserNumber,
+   removeFollowedUserNumber
+} from "../../redux/usersReducer";
 import Users from "./Users";
 import { useEffect } from "react";
 import axios from "axios";
 import Preloader from "../UI/Preloader/Preloader";
+import { usersAPI } from "../../api";
 
 type UsersContainerPropsType = {
    users: Array<UserType>
@@ -18,43 +29,65 @@ type UsersContainerPropsType = {
    setUsers: (users: Array<UserType>) => void
    setFetchingStatus: (status: boolean) => void
    isFetching: boolean
+   followedUsers: Array<number>
+   removeFollowedUserNumber: (id: number) => void
+   addFollowedUserNumber: (id: number) => void
 
 }
 
-type GetResponseUsersDataType = {
-   items: Array<UserType>
-   totalCount: number
-}
+// type GetResponseUsersDataType = {
+//    items: Array<UserType>
+//    totalCount: number
+// }
 
 const UsersContainer = (props: UsersContainerPropsType) => {
 
    useEffect(() => {
-      // return () => {
-      async function getUsers() {
-         props.setFetchingStatus(true);
-         await axios.get<GetResponseUsersDataType>(`${baseUrl}users?page=${props.currentPage}&count=${props.usersCount}`)
-            .then(response => {
-               // console.log(response.data.items);
-               props.setTotalCount(response.data.totalCount);
-               props.setUsers(response.data.items)
-               props.setFetchingStatus(false);
-            })
-      }
-      getUsers();
-      // }
-   }, [props.currentPage]);
+      props.setFetchingStatus(true);
+      usersAPI.getUsers(props.currentPage, props.usersCount)
+         .then(response => {
+            props.setTotalCount(response.data.totalCount);
+            props.setUsers(response.data.items)
+            props.setFetchingStatus(false);
+         })
 
+   }, [props.currentPage]);
+   const follow = (id: number) => {
+      props.addFollowedUserNumber(id)
+      usersAPI.follow(id)
+         .then(response => {
+            if (response.data.resultCode === 0) {
+               props.follow(id)
+            }
+         })
+      props.removeFollowedUserNumber(id);
+
+   }
+   const unfollow = (id: number) => {
+
+      props.addFollowedUserNumber(id)
+
+      usersAPI.unfollow(id)
+         .then(response => {
+            if (response.data.resultCode === 0) {
+               props.unfollow(id);
+               props.removeFollowedUserNumber(id);
+            }
+         })
+
+   }
    return (
       <div>
          {props.isFetching ? <Preloader /> : < Users currentPage={props.currentPage}
             users={props.users}
             usersCount={props.usersCount}
             totalCount={props.totalCount}
-            follow={props.follow}
-            unfollow={props.unfollow}
+            follow={follow}
+            unfollow={unfollow}
             setCurrentPage={props.setCurrentPage}
             setTotalCount={props.setTotalCount}
             setUsers={props.setUsers}
+            followedUsers={props.followedUsers}
 
          />}
       </div>
@@ -68,7 +101,8 @@ const mstp = (state: StateType) => {
       totalCount: state.usersPage.totalCount,
       currentPage: state.usersPage.currentPage,
       usersCount: state.usersPage.usersCount,
-      isFetching: state.usersPage.isFetching
+      isFetching: state.usersPage.isFetching,
+      followedUsers: state.usersPage.followedUsers
    }
 }
 
@@ -98,5 +132,7 @@ export default connect(mstp, {
    setTotalCount,
    setUsers,
    unfollow,
-   setFetchingStatus
+   setFetchingStatus,
+   addFollowedUserNumber,
+   removeFollowedUserNumber
 })(UsersContainer)

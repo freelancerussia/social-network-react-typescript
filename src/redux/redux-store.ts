@@ -4,6 +4,7 @@ import profileReducer from "./profileReducer";
 import dialogsReducer from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReduser from "./usersReducer";
+import authReducer from "./authReducer"
 
 export const baseUrl = "https://social-network.samuraijs.com/api/1.0/";
 
@@ -13,6 +14,7 @@ let reducers = combineReducers({
    dialogsPage: dialogsReducer,
    sidebarPage: sidebarReducer,
    usersPage: usersReduser,
+   authPage: authReducer,
 });
 let store = configureStore({
    reducer: reducers,

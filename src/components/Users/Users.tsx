@@ -16,6 +16,8 @@ type UsersPropsType = {
    setTotalCount: (count: number) => void
    setCurrentPage: (page: number) => void
    totalCount: number
+   followedUsers: Array<number>
+
 }
 
 const Users = (props: UsersPropsType) => {
@@ -34,7 +36,9 @@ const Users = (props: UsersPropsType) => {
                   followed={u.followed}
                   name={u.name}
                   status={u.status}
-                  photos={u.photos.small} />
+                  photos={u.photos.small}
+                  followedUsers={props.followedUsers}
+               />
             )
          })}
          <button >GET USERS</button>

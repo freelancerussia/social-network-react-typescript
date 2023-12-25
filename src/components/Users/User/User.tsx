@@ -11,6 +11,8 @@ type UserPropsType = {
    follow: (id: number) => void
    unfollow: (id: number) => void
    id: number
+   followedUsers: Array<number>
+
 }
 
 const User = (props: UserPropsType) => {
@@ -28,7 +30,9 @@ const User = (props: UserPropsType) => {
 
                <div className={styles.imgContainer}><img src={props.photos || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ArKQ5AIUqacA-5ofQ5nfPevwR0RtI7PBtg&usqp=CAU"} alt="" /></div>
             </Link>
-            <div> {props.followed ? <button onClick={onUnFollow}>unfollow</button> : <button onClick={onFollow}>follow</button>} </div>
+            <div> {props.followed
+               ? <button disabled={props.followedUsers.includes(props.id)} onClick={onUnFollow}>unfollow</button>
+               : <button disabled={props.followedUsers.includes(props.id)} onClick={onFollow}>follow</button>} </div>
          </div>
          <div>
             <div>
