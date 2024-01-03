@@ -1,7 +1,18 @@
 import { v1 } from "uuid";
-import { DialogsPageType } from "./state"
 
-
+export type DialogsPageType = {
+   messages: Array<MessageType>
+   dialogs: Array<DialogType>
+   newMessageText: string
+}
+type MessageType = {
+   id: string
+   message: string
+}
+type DialogType = {
+   id: string
+   name: string
+}
 export type DialogsReducerActionType = updateNewMessageTextAction | AddNewMessageActionType
 
 export type updateNewMessageTextAction = {

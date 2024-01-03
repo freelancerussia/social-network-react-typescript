@@ -21,7 +21,11 @@ type AuthDataResponse = {
 
 const instance = axios.create({
    baseURL: "https://social-network.samuraijs.com/api/1.0/",
-   withCredentials: true
+   withCredentials: true,
+   headers: {
+      // 'Authorization': 'Bearer my-token',
+      // 'My-Custom-Header': 'foobar'
+   }
 })
 
 
@@ -41,6 +45,9 @@ export const usersAPI = {
       return await instance.delete(`follow/${userId}`)
    },
 
+   async setStatus(status: string | null) {
+      return await instance.put('profile/status', { status });
+   },
 
 };
 

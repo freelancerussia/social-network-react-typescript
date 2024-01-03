@@ -2,17 +2,18 @@ import React, { ChangeEvent } from "react";
 import styles from "./Dialogs.module.css"
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
-import { DialogsPageType } from "../../redux/state";
 import { Myform } from "../UI/Myform/Myform";
+import { DialogsPageType } from "../../redux/dialogsReducer";
 
 
-type DialogsPropsType = {
+
+export type DialogsPropsType = {
    dialogsPage: DialogsPageType
    updateNewMessageText: (newMessage: string) => void
    addNewMessage: () => void
-
-
+   authMe: boolean
 }
+export type DialogsType = typeof Dialogs
 const Dialogs = (props: DialogsPropsType) => {
 
    const updateNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {

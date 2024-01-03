@@ -1,25 +1,28 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { StateType, baseUrl } from "../../redux/redux-store";
+import { StateType } from "../../redux/redux-store";
 import {
    updateNewPostText,
    addPost,
    ProfilePageType,
    setUserProfile,
    UserProfileType,
-   getProfile
+   getProfile,
+   setStatusThunk
 } from "../../redux/profileReducer";
-import axios from "axios";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 import { useParams } from "react-router-dom";
-import { usersAPI } from "../../api";
 
-type ProfileContainerPropsType = {
+export type ProfileContainerPropsType = {
    profilePage: ProfilePageType
    userProfile: UserProfileType
    setUserProfile: (userProfile: UserProfileType) => void
    idMyProfile: number
    getProfile: (id: number) => void
+   authMe: boolean
+   setStatusThunk: (status: string | null) => void
+   status: string | null
 }
 
 const ProfileContainer = (props: ProfileContainerPropsType) => {
@@ -27,27 +30,38 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
    const params = useParams();
    useEffect(() => {
       let id = params.id ? +params.id : props.idMyProfile;
-
       props.getProfile(id)
-
-
    }, [params.id, props.userProfile.userId]);
-
+   const updateStatus = (status: string | null) => {
+      props.setStatusThunk(status);
+   }
+   // if (!props.authMe) return <Navigate to="/login" />
    return (
-      <Profile profilePage={props.profilePage} userProfile={props.userProfile} />
+      <Profile status={props.status} updateStatus={updateStatus} profilePage={props.profilePage} userProfile={props.userProfile} />
    )
 }
+
+export type ProfileContainerType = typeof ProfileContainer;
+
+const WithAuthRedirectProfileContainer = withAuthRedirect(ProfileContainer)
+// (props: ProfileContainerPropsType) => {
+//    if (!props.authMe) return <Navigate to="/login" />
+//    return <ProfileContainer {...props} />
+// }
 
 const mstp = (state: StateType) => {
    return {
       profilePage: state.profilePage,
       userProfile: state.profilePage.userProfile,
-      idMyProfile: state.authPage.id
+      idMyProfile: state.authPage.id,
+      authMe: state.authPage.isAuth,
+      status: state.profilePage.status
    }
 }
 export default connect(mstp, {
    updateNewPostText,
    addPost,
    setUserProfile,
-   getProfile
-})(ProfileContainer);
+   getProfile,
+   setStatusThunk
+})(WithAuthRedirectProfileContainer);

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "./redux-store";
 import { authAPI } from "../api";
 
@@ -26,7 +26,13 @@ const authSlice = createSlice({
          state.isAuth = action.payload.isAuth
          state.id = action.payload.id
       }
-   }
+
+   },
+   // extraReducers: (builder) => {
+   //    builder.addMatcher(me.fulfilled, (state, action) => {
+
+   //    })
+   // }
 });
 
 
@@ -34,12 +40,17 @@ export const { me } = authSlice.actions;
 
 export default authSlice.reducer;
 
-// export const authMe = () => (dispatch: AppDispatch) => {
-//    authAPI.me()
-//       .then(response => {
-//          if (response.data.resultCode === 0) {
-//             dispatch(me({ login: response.data.data.login, email: response.data.data.email, isAuth: true, id: response.data.data.id }))
-//          }
+// export const me = createAsyncThunk(
+//    "auth/me",
+//    () => {
+//       authAPI.me()
+//          .then(response => {
+//             if (response.data.resultCode === 0) {
+//                return { login: response.data.data.login, email: response.data.data.email, isAuth: true, id: response.data.data.id }
+//             }
 
-//       })
-// }
+//          }
+//          )
+//    }
+
+// )

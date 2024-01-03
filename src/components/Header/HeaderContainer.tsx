@@ -20,7 +20,7 @@ const HeaderContainer = () => {
             }
 
          })
-      // dispatch(authMe())
+      // authMe()
    }, [])
 
    return (

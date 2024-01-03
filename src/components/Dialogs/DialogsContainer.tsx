@@ -2,10 +2,15 @@ import { addNewMessagetAC, updateNewMessageTextAC } from "../../redux/dialogsRed
 import Dialogs from "./Dialogs";
 import { AppDispatch, StateType, } from "../../redux/redux-store";
 import { connect } from "react-redux";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
+
+
+// const WithAuthRedirectDialogsContainer = withAuthRedirect(Dialogs)
 
 let mstp = (state: StateType) => {
    return {
-      dialogsPage: state.dialogsPage
+      dialogsPage: state.dialogsPage,
+      authMe: state.authPage.isAuth
    }
 }
 let mdtp = (dispatch: AppDispatch) => {

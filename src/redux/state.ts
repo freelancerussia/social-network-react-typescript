@@ -1,25 +1,25 @@
 import { DialogsReducerActionType } from "./dialogsReducer"
-import profileReducer, { ProfileReducerActionType } from "./profileReducer"
+import { ProfileReducerActionType } from "./profileReducer"
 
 
-export type MessageType = {
-   id: string
-   message: string
-}
-export type DialogType = {
-   id: string
-   name: string
-}
+// export type MessageType = {
+//    id: string
+//    message: string
+// }
+// export type DialogType = {
+//    id: string
+//    name: string
+// }
 
 
 
 
 
-export type DialogsPageType = {
-   messages: Array<MessageType>
-   dialogs: Array<DialogType>
-   newMessageText: string
-}
+// export type DialogsPageType = {
+//    messages: Array<MessageType>
+//    dialogs: Array<DialogType>
+//    newMessageText: string
+// }
 
 export type MusicPageType = {}
 // export type StateType = {
