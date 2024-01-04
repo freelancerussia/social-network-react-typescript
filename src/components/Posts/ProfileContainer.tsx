@@ -9,7 +9,8 @@ import {
    setUserProfile,
    UserProfileType,
    getProfile,
-   setStatusThunk
+   setStatusThunk,
+   getUserStatus
 } from "../../redux/profileReducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import { useParams } from "react-router-dom";
@@ -23,6 +24,7 @@ export type ProfileContainerPropsType = {
    authMe: boolean
    setStatusThunk: (status: string | null) => void
    status: string | null
+   getUserStatus: (id: number) => void
 }
 
 const ProfileContainer = (props: ProfileContainerPropsType) => {
@@ -30,8 +32,10 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
    const params = useParams();
    useEffect(() => {
       let id = params.id ? +params.id : props.idMyProfile;
-      props.getProfile(id)
+      props.getProfile(id);
+      props.getUserStatus(id)
    }, [params.id, props.userProfile.userId]);
+
    const updateStatus = (status: string | null) => {
       props.setStatusThunk(status);
    }
@@ -63,5 +67,6 @@ export default connect(mstp, {
    addPost,
    setUserProfile,
    getProfile,
-   setStatusThunk
+   setStatusThunk,
+   getUserStatus
 })(WithAuthRedirectProfileContainer);

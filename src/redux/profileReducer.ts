@@ -2,6 +2,10 @@ import { v1 } from "uuid"
 import { AppDispatch } from "./redux-store"
 import { usersAPI } from "../api"
 
+// type getUserStatus = {
+//    type: "GET_USER_STATUS"
+//    id: number
+// }
 type setUserStatus = {
    type: "SET_USER_STATUS"
    status: null | string
@@ -93,6 +97,7 @@ let initialState: ProfilePageType = {
 export type ProfileReducerActionType = addPostActionType | updateNewPostTextActionType | SetUserProfileAction | setUserStatus
 
 
+
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType): ProfilePageType => {
    let copyState = { ...state };
    switch (action.type) {
@@ -151,6 +156,12 @@ const setUserStatus = (status: string | null): setUserStatus => {
       status
    }
 }
+// const getStatus = (id: number): getUserStatus => {
+//    return {
+//       type: 'GET_USER_STATUS',
+//       id
+//    }
+// }
 
 export const getProfile = (id: number) => (dispatch: AppDispatch) => {
    usersAPI.getProfile(id)
@@ -169,5 +180,13 @@ export const setStatusThunk = (status: string | null) => (dispatch: AppDispatch)
          }
       })
 }
+
+export const getUserStatus = (id: number) => (dispatch: AppDispatch) => {
+   usersAPI.getUserStatus(id)
+      .then(response => {
+         dispatch(setUserStatus(response.data));
+      })
+}
+
 
 export default profileReducer;

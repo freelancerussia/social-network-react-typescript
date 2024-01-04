@@ -48,6 +48,9 @@ export const usersAPI = {
    async setStatus(status: string | null) {
       return await instance.put('profile/status', { status });
    },
+   async getUserStatus(id: number) {
+      return await instance.get(`profile/status/${id}`);
+   },
 
 };
 
