@@ -7,13 +7,15 @@ export type AuthStateType = {
    isAuth: boolean
    login: string | null
    id: number
+   inizialize: boolean
 }
 
 const initialState: AuthStateType = {
    email: "",
    isAuth: false,
    login: "",
-   id: 2
+   id: 2,
+   inizialize: false
 }
 
 const authSlice = createSlice({
@@ -25,6 +27,19 @@ const authSlice = createSlice({
          state.login = action.payload.login
          state.isAuth = action.payload.isAuth
          state.id = action.payload.id
+      },
+      login(state, action: { payload: { id: number, isAuth: boolean } }) {
+         state.id = action.payload.id
+         state.isAuth = action.payload.isAuth
+      },
+      logout(state) {
+         state.email = null
+         state.login = null
+         state.isAuth = false
+         state.id = 0
+      },
+      setInizializeStatus(state, action) {
+         state.inizialize = action.payload
       }
 
    },
@@ -36,7 +51,7 @@ const authSlice = createSlice({
 });
 
 
-export const { me } = authSlice.actions;
+export const { me, login, logout, setInizializeStatus } = authSlice.actions;
 
 export default authSlice.reducer;
 

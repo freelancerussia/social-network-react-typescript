@@ -18,6 +18,7 @@ let reducers = combineReducers({
 });
 let store = configureStore({
    reducer: reducers,
+   devTools: true
    // middleware(getDefaultMiddleware) => {}
 });
 

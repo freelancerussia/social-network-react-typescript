@@ -12,6 +12,8 @@ type ProfilePropsType = {
 }
 
 const Profile = (props: ProfilePropsType) => {
+   console.log("RENDER CONTAINER");
+
    return (
       <div>
          <Profileinfo status={props.status} updateStatus={props.updateStatus} userProfile={props.userProfile} />

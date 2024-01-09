@@ -13,7 +13,7 @@ import {
    getUserStatus
 } from "../../redux/profileReducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export type ProfileContainerPropsType = {
    profilePage: ProfilePageType
@@ -30,6 +30,7 @@ export type ProfileContainerPropsType = {
 const ProfileContainer = (props: ProfileContainerPropsType) => {
 
    const params = useParams();
+
    useEffect(() => {
       let id = params.id ? +params.id : props.idMyProfile;
       props.getProfile(id);
@@ -39,7 +40,8 @@ const ProfileContainer = (props: ProfileContainerPropsType) => {
    const updateStatus = (status: string | null) => {
       props.setStatusThunk(status);
    }
-   // if (!props.authMe) return <Navigate to="/login" />
+   if (!props.authMe) return <Navigate to="/login" />
+
    return (
       <Profile status={props.status} updateStatus={updateStatus} profilePage={props.profilePage} userProfile={props.userProfile} />
    )

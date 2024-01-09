@@ -12,16 +12,16 @@ const HeaderContainer = () => {
    let state = useSelector((state: StateType) => state.authPage);
    let dispatch = useDispatch()
 
-   useEffect(() => {
-      authAPI.me()
-         .then(response => {
-            if (response.data.resultCode === 0) {
-               dispatch(me({ login: response.data.data.login, email: response.data.data.email, isAuth: true, id: response.data.data.id }))
-            }
+   // useEffect(() => {
+   //    authAPI.me()
+   //       .then(response => {
+   //          if (response.data.resultCode === 0) {
+   //             dispatch(me({ login: response.data.data.login, email: response.data.data.email, isAuth: true, id: response.data.data.id }))
+   //          }
 
-         })
-      // authMe()
-   }, [])
+   //       })
+   //    // authMe()
+   // }, [])
 
    return (
       <Header state={state} />

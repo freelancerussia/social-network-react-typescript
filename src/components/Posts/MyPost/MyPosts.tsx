@@ -15,6 +15,8 @@ type MyPostPropsType = {
 
 
 const MyPost = (props: MyPostPropsType) => {
+   console.log("RENDER");
+
 
    const addPost = () => {
       props.addPost();

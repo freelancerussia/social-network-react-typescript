@@ -19,6 +19,15 @@ type AuthDataResponse = {
    resultCode: number
 }
 
+
+type LoginResponseType = {
+   resultCode: number
+   data: { userId: number }
+   messages: Array<string>
+
+
+}
+
 const instance = axios.create({
    baseURL: "https://social-network.samuraijs.com/api/1.0/",
    withCredentials: true,
@@ -51,6 +60,12 @@ export const usersAPI = {
    async getUserStatus(id: number) {
       return await instance.get(`profile/status/${id}`);
    },
+   async login(email: string, password: string, rememberMe: boolean) {
+      return await instance.post<LoginResponseType>(`auth/login`, { email, password, rememberMe });
+   },
+   async logOut() {
+      return instance.delete("auth/login");
+   }
 
 };
 
