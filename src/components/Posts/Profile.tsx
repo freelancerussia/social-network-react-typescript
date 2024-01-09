@@ -12,7 +12,6 @@ type ProfilePropsType = {
 }
 
 const Profile = (props: ProfilePropsType) => {
-   console.log("RENDER CONTAINER");
 
    return (
       <div>

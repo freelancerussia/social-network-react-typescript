@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Music from './components/Music/Music';
+// import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Posts/ProfileContainer';
 import { SidebarType } from './redux/sidebarReducer';
@@ -16,6 +16,9 @@ import { me, setInizializeStatus } from './redux/authReducer';
 import { useSelector } from 'react-redux';
 import { StateType } from './redux/redux-store';
 import Preloader from './components/UI/Preloader/Preloader';
+
+const Music = lazy(() => import('./components/Music/Music'))
+const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'))
 
 type AppPropsType = {
   sideBar: SidebarType
@@ -33,7 +36,7 @@ function App(props: AppPropsType) {
     let promise = authAPI.me();
     promise
       .then(response => {
-        console.log(response);
+        // console.log(response);
         if (response.data.resultCode === 0) {
           dispatch(me({
             login: response.data.data.login,
@@ -47,7 +50,7 @@ function App(props: AppPropsType) {
       })
     // authMe()
   }, [isAuth])
-  console.log(inizialize);
+  console.log("!!!!!!!!!!!!!!!!", !inizialize);
   if (!inizialize) return <Preloader />
 
 
@@ -63,8 +66,16 @@ function App(props: AppPropsType) {
             <Route path="/profile/" element={<ProfileContainer />} >
               <Route path=":id" element={<ProfileContainer />} />
             </Route>
-            <Route path="/dialogs/*" element={<DialogsContainer />} />
-            <Route path="/music" element={<Music />} />
+            <Route path="/dialogs/*" element={
+              <Suspense fallback={<Preloader />}>
+                <DialogsContainer />
+              </Suspense>
+            } />
+            <Route path="/music" element={
+              <Suspense fallback={<Preloader />}>
+                <Music />
+              </Suspense>
+            } />
             <Route path="/settings" element={<Settings />} />
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/login" element={<Login />} />
